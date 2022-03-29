@@ -1,0 +1,19 @@
+Go Introduction
+Go or Golang is the programming language created by Google, Google developers and other programmers. This programming language is free, open source and currently maintained by the Google. One of the founder member of the Go is the Ken Thompson who is best known for is Unix Operating System Development. Go compilers initially written in C, now it is written in Go itself, making it self hosted.
+So, what's so special about Go?
+Go is statically typed compiled language.
+It supports the built-in concurrency model with the help of GoRoutines.
+It has a built-in Garbage-Collector and Memory safety.
+Strings in Go are UTF-8 encoded by default.
+It has simple syntax as compared to other compiled languages.
+The motivation behind its creation
+There are tons of programming languages to choose from now days. Each programming language has its own benefits and different programmer finds different programming languages friendlier than others.
+
+The four important things a language must thrive to achieve is speed/efficiency, reliability, scale, and simplicity.
+
+If we consider languages like C, C++ then they are great at speed, scale and reliability but but in terms of simplicity not so great. Java is very reliable, scalable but moderately simple to write not so great.
+
+Go provides all the 4 important things. Their major focus was on simplicity, scale, speed, and reliability. Since Go is a commonly used English word, searching Go programming related things on the internet is not so easy, hence many people use GoLang instead.
+
+Go has a future on the client-side “front end,” as well (GopherJS).
+https://github.com/gopherjs/gopherjs
