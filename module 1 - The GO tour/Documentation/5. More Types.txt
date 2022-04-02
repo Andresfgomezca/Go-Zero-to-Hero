@@ -140,16 +140,105 @@ Creating a slice with make
 
 
 
+Slices of slices
+
+	Slices can contain any type, including other slices.
+
+Appending to a slice
+
+	It is common to append new elements to a slice, and so Go provides a built-in append function. The documentation of the built-in package describes append. https://go.dev/pkg/builtin/#append
+
+		func append(s []T, vs ...T) []T
+
+	The first parameter s of append is a slice of type T, and the rest are T values to append to the slice.
+
+	The resulting value of append is a slice containing all the elements of the original slice plus the provided values.
+
+	If the backing array of s is too small to fit all the given values a bigger array will be allocated. The returned slice will point to the newly allocated array.
+
+(To learn more about slices, read the Slices: usage and internals article.)
+https://go.dev/blog/go-slices-usage-and-internals
+
+Range
+
+	The range form of the for loop iterates over a slice or map.
+
+	When ranging over a slice, two values are returned for each iteration. The first is the index, and the second is a copy of the element at that index.
+
+Range continued
+
+	You can skip the index or value by assigning to _.
+
+		for i, _ := range pow
+		for _, value := range pow
+
+	If you only want the index, you can omit the second variable.
+
+		for i := range pow
+
+Maps
+
+	A map maps keys to values.
+
+	The zero value of a map is nil. A nil map has no keys, nor can keys be added.
+
+	The make function returns a map of the given type, initialized and ready for use.
+
+Map literals
+
+	Map literals are like struct literals, but the keys are required.
+
+Map literals continued
+
+	If the top-level type is just a type name, you can omit it from the elements of the literal.
+
+Mutating Maps
+
+	Insert or update an element in map m:
+
+		m[key] = elem
+
+	Retrieve an element:
+
+		elem = m[key]
+
+	Delete an element:
+
+		delete(m, key)
+
+	Test that a key is present with a two-value assignment:
+
+		elem, ok = m[key]
+	
+	If key is in m, ok is true. If not, ok is false.
+
+	If key is not in the map, then elem is the zero value for the map's element type.
+
+Note: If elem or ok have not yet been declared you could use a short declaration form:
+
+		elem, ok := m[key]
+
+func fields will splits a string into an array by words separated by spaces
+strings.Fields("  foo bar  baz   ")
+https://pkg.go.dev/strings#Fields
+
+Function values
+
+	Functions are values too. They can be passed around just like other values.
+
+	Function values may be used as function arguments and return values.
+
+Function closures
+
+	Go functions may be closures. A closure is a function value that references variables from outside its body. The function may access and assign to the referenced variables; in this sense the function is "bound" to the variables.
+
+	For example, the adder function returns a closure. Each closure is bound to its own sum variable.
 
 
+Congratulations!
+You finished this lesson!
 
-
-
-
-
-
-
-
+You can go back to the list of modules to find what to learn next, or continue with the next lesson.
 
 
 

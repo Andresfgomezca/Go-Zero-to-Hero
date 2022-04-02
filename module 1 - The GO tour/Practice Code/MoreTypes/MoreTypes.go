@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
 	fmt.Println("Implementation of the pointers that calls the memory address of a value")
@@ -148,12 +151,124 @@ func main() {
 
 	d := c[2:5]
 	printSlicel("d", d)
+	fmt.Println("----------------------------------------------")
+	fmt.Println("Slices of slices")
+	// Create a tic-tac-toe board. with slices inside slices
+	board := [][]string{
+		{"_", "_", "_"},
+		{"_", "_", "_"},
+		{"_", "_", "_"},
+	}
+
+	// The players take turns.
+	board[0][0] = "X"
+	board[2][2] = "O"
+	board[1][2] = "X"
+	board[1][0] = "O"
+	board[0][2] = "X"
+	//this cicle is ready each row and separating the elements with  " "
+	for i := 0; i < len(board); i++ {
+		fmt.Printf("%s\n", strings.Join(board[i], " "))
+	}
+	fmt.Println("----------------------------------------------")
+	fmt.Println("Appending to a slice")
+	var aa []int
+	printSlice(aa)
+	//this function will add elements to a slice
+	// append works on nil slices.
+	aa = append(aa, 0)
+	printSlice(aa)
+
+	// The slice grows as needed.
+	aa = append(aa, 1)
+	printSlice(aa)
+
+	// We can add more than one element at a time.
+	aa = append(aa, 2, 3, 4)
+	printSlice(aa)
+	fmt.Println("----------------------------------------------")
+	fmt.Println("Range")
+	//range is a form of the for loop that will iterate over a slice and it will also return
+	//2 elements, the index and the element
+	var pow = []int{1, 2, 4, 8, 16, 32, 64, 128}
+	for i, v := range pow {
+		fmt.Printf("2**%d = %d\n", i, v)
+	}
+	fmt.Println("----------------------------------------------")
+	fmt.Println("Range Continued")
+	//we can implement the for range with different variables if we want to omit a
+	//value with _ instead of a variable
+	pow = make([]int, 10)
+	for i := range pow {
+		// << means times 2 and unit(i) means how many times
+		//in this case 2 will be repeated by 1 i times or 1x2xi where 1 can be modified
+		//>> means divided by 2  and i will be how many times
+		//10>>2=2.5
+		pow[i] = 1 << uint(i) // == 2**i
+	}
+	for _, value := range pow {
+		fmt.Printf("%d\n", value)
+	}
+	fmt.Println("----------------------------------------------")
+	fmt.Println("Maps")
+	var m map[string]Vertex
+	//this map will map keys to values
+	//where the keys are strings and the values are vertex
+	m = make(map[string]Vertex)
+	//here we are filling the map with a key called bell labs and it will contain a vertex
+	m["Bell Labs"] = Vertex{40.68433, -74.39967}
+	m["Google"] = Vertex{37.42202, -122.08408}
+	//now we are calling the vertex by looking the value with its key
+	fmt.Println(m["Bell Labs"])
+	//we can also print the complete map
+	fmt.Println(m)
+	fmt.Println("----------------------------------------------")
+	fmt.Println("Mutating Maps")
+	//these are the methods that mutate the maps
+	ac := make(map[string]int)
+	//inserting an element in the map
+	ac["Answer"] = 42
+	fmt.Println("The value:", ac["Answer"])
+	//updating and element in the maap
+	ac["Answer"] = 48
+	fmt.Println("The value:", ac["Answer"])
+	//deleting an element in the map
+	delete(ac, "Answer")
+	fmt.Println("The value:", ac["Answer"])
+	//testing if the element is present in the map with the key
+	ad, ok := m["Answer"]
+	//the element will be retrieve to ad and ok will be a bool that defines if the key exists
+	fmt.Println("The value:", ad, "Present?", ok)
+	//if the key is present ok will be true and if it is not it will be false
+	//if ad or ok are not declared we can use a short declaration form
+	//ad, ok := m["Answer"]
+	fmt.Println("----------------------------------------------")
+	fmt.Println("function values")
+	//functions can be used as values in other functions arguments or a return value for a function
+	//func compute(fn func(float64, float64) float64) float64 {	return fn(3, 4)}
+	fmt.Println("----------------------------------------------")
+	fmt.Println("function closures")
+	//those are functions that returns another function, the one that is return is 
+	//defined anonymously in the body of the main function, this process allows the internal function
+	//to have access to the variables of the main function
+	//func adder() func(int) int {	sum := 0	return func(x int) int {sum += x	return sum	}}
+	//pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+		//	pos(i),
+		//	neg(-2*i),
+		)
+	}
+
+
 }
 
 type Vertex struct {
-	X int
-	Y int
+	X, Y float64
 }
+
+//we can also define a map a fill it out of the functions
+//var m = map[string]Vertex{	"Bell Labs": {40.68433, -74.39967},	"Google":    {37.42202, -122.08408},}
 
 //function created to print slice with information of its capacity and length
 func printSlice(z []int) {
