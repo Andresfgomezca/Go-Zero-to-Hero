@@ -2,7 +2,10 @@ package main
 
 import (
 	"fmt"
+	"image"
+	"io"
 	"math"
+	"strings"
 	"time"
 )
 
@@ -171,6 +174,34 @@ func main() {
 	if err := run(); err != nil {
 		fmt.Println(err)
 	}
+	fmt.Println("----------------------------------------------")
+	fmt.Println("Readers ")
+	//the new reader function returns a new reader
+	r := strings.NewReader("Hello, Reader!")
+	//the io.reader interface has a read method
+	b := make([]byte, 8)
+	for {
+		//read populates the given byte slice with dataa and returns the number of
+		//bytes populated and an error value
+		//it returns an io.EOF error when the stream ends
+		n, err := r.Read(b)
+		//the bytes are ascii code
+		fmt.Printf("n = %v err = %v b = %v\n", n, err, b)
+		fmt.Printf("b[:n] = %q\n", b[:n])
+		if err == io.EOF {
+			//the infinite  loop ends when the error is triggered
+			break
+		}
+	}
+	fmt.Println("----------------------------------------------")
+	fmt.Println("Images ")
+	//package image defines the image interface
+	m := image.NewRGBA(image.Rect(0, 0, 100, 100))
+	fmt.Println(m.Bounds())
+	fmt.Println(m.At(0, 0).RGBA())
+	//https://go.dev/pkg/image/#Image
+	fmt.Println("----------------------------------------------")
+	fmt.Println(" ")
 	fmt.Println("----------------------------------------------")
 	fmt.Println(" ")
 

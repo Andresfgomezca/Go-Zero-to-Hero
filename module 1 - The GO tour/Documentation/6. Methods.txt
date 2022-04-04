@@ -195,3 +195,39 @@ Errors
 		fmt.Println("Converted integer:", i)
 
 	A nil error denotes success; a non-nil error denotes failure.
+
+
+Readers
+
+	The io package specifies the io.Reader interface, which represents the read end of a stream of data.
+
+	The Go standard library contains many implementations of this interface, including files, network connections, compressors, ciphers, and others.
+
+	The io.Reader interface has a Read method:
+
+		func (T) Read(b []byte) (n int, err error)
+
+	Read populates the given byte slice with data and returns the number of bytes populated and an error value. It returns an io.EOF error when the stream ends.
+
+	The example code creates a strings.Reader and consumes its output 8 bytes at a time.
+
+
+Images
+
+	Package image defines the Image interface:
+
+	package image
+
+	type Image interface {
+    		ColorModel() color.Model
+    		Bounds() Rectangle
+    		At(x, y int) color.Color
+	}
+
+	Note: the Rectangle return value of the Bounds method is actually an image.Rectangle, as the declaration is inside package image.
+
+(See the documentation for all the details.)
+https://go.dev/pkg/image/#Image
+
+	The color.Color and color.Model types are also interfaces, but we'll ignore that by using the predefined implementations color.RGBA and color.RGBAModel. These interfaces and types are specified by the image/color package
+https://go.dev/pkg/image/color/
