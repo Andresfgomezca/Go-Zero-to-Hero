@@ -1,0 +1,12 @@
+Variables and constants
+
+	In Go, variables are explicitly declared and used by the compiler. variable can be of type local and global.
+		
+		-The keyword var can be used to declare the variable.
+
+		-Go provides flexibility that, we can ignore the type of variable if you are assigning the value to it, Go compiler automatically detect the type of assignment value and create the variable of that type
+
+Short Variable Declaration
+	
+	Inside a function, the := short assignment statement can be used in place of a var declaration with implicit type. Outside a function, every statement begins with a keyword (var, func, and so on) and so the := construct is not available.
+ 
