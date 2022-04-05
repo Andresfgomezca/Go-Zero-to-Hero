@@ -9,4 +9,8 @@ Variables and constants
 Short Variable Declaration
 	
 	Inside a function, the := short assignment statement can be used in place of a var declaration with implicit type. Outside a function, every statement begins with a keyword (var, func, and so on) and so the := construct is not available.
+
+Constant
+
+	Go supports constants of character, string, boolean and numeric values. constant can be declared similar to variable additionally we need const keyword with it. as like other languages constant value doesn't change throughout the code and assignment of value is required while declaration if the constant.
  
