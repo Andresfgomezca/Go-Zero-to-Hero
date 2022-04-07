@@ -1,0 +1,16 @@
+Variadic Functions
+
+	Variadic functions can be called with any number of trailing arguments. For example, fmt.Println() is a common variadic function. This feature is similar to the var agrs in Java.
+
+func sum(nums ...int) {
+    fmt.Print(nums, " ")
+    total := 0
+    for _, num := range nums {
+        total += num
+    }
+    fmt.Println(total)
+}
+
+	The above function sum() takes any number of integer parameters and calculate the sum.  we can use range operator to iterate those variadic parameters.
+
+	If you have already multiple args in a slice, apply them to a variadic function using func(slice ...) like this.

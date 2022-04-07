@@ -1,0 +1,9 @@
+Multiple Return Values
+
+	Go has inbuilt support for multiple return values. This feature is used often in idiomatic Go. for example we can return the result and error from the function. function with multiple return values looks like
+
+func swap(x, y int) (int, int) {
+    return y, x
+}
+
+	The above function accepts 2 int and return the 2 ints.

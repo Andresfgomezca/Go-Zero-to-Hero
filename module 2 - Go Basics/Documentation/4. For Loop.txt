@@ -1,0 +1,23 @@
+For Loop 
+
+	for is the Go's only loop. Unlike other languages like C and Java we don't have while and do-while loop but we can achieve the behaviour of those loops using the for loop.
+
+	A classic example of for loop is:
+for j := 1; j <= 5; j++ {
+        fmt.Println(j)
+    }
+
+	While loop using for loop:
+i := 1
+for i <= 3 {
+    fmt.Println(i)
+    i = i + 1
+}
+
+	Infinite for loop:
+for {
+    fmt.Println("loop")
+}
+ 
+
+	There are other forms of loop are available which basically work on collections, channels and other data types called range. we will explore them in next section.

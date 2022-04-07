@@ -1,0 +1,27 @@
+Range
+
+	Range iterates over elements in a variety of data structures. Let's see how to use range with some of the data structures we've already learned.  The range form of the for loop iterates over the slice or map.
+
+	When ranging over a slice, two values are returned for each iteration. the first is the index and the second is a copy of the element at the index.
+
+	You can skip the index or value by assigning to _.
+
+		for i, _ := range pow
+		for _, value := range pow
+
+	if you only want the index, you can omit the second variable.
+
+		for i := range pow
+
+	Range operator also works on Map as well as strings. we can iterate key and value as well as we can just iterate just keys.
+
+// `range` on map iterates over key/value pairs.
+kvs := map[string]string{"a": "apple", "b": "banana"}
+for k, v := range kvs {
+	fmt.Printf("%s -> %s\n", k, v)
+}
+
+// `range` can also iterate over just the keys of a map.
+for k := range kvs {
+	fmt.Println("key:", k)
+}

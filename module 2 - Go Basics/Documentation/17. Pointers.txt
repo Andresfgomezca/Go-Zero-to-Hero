@@ -1,0 +1,19 @@
+Pointers
+
+	Go supports pointers, allowing you to pass references to values and records within your program. All values are stored in memory. Each location has an address. a pointer is nothing but memory address.
+
+	Go is PASS BY VALUE by default. When we pass pointer to the function it actually send the memory address.
+
+	We can use * operator to define the pointer. using the & operator we can assign the address of the variable.
+
+		a := 10
+		var b = &a
+
+	Here variable a of int type and variable b is of type *int (pointer to int). Variable b holds the address of a. let's understand this using one example.
+
+	When we change the value of pointer (in this case b) it actual changes the value of underlying variable (i.e. a).
+
+Pass By Reference using Pointer
+
+	As we know, Go is pass by value. When we are dealing with large objects, and passing large objects to function slows down the execution, to avoid this we can pass the address of the object and function can change the actual object. 
+

@@ -1,0 +1,49 @@
+Maps
+
+	Maps are Go's build-in associative data type. it is similar to the Map in Java. A map maps keys and values.
+
+	The zero value of a map is nil. A nil map has no keys, nor can keys be added.
+package main
+
+import "fmt"
+
+var m map[string]int
+
+func main() {
+    if(m == nil) {
+        fmt.Println("Map is Nil!")
+    }	
+}
+
+	The make function returns a map of the given type, initialised and ready for use.
+
+	To create an empty map, use the built-in make:
+
+		m := make(map[string]int)
+
+	The map m has key of string type and value of int type.
+
+Mutating Maps
+
+	Insert or update an element in map m
+
+		m[key] = element
+
+	Retrieve an element
+
+		element = m[key]
+
+	Delete an element:
+
+		delete(m, key)
+
+	Test that a key is present with a two value assignment
+
+		element, ok = m[key]
+
+	If key is in m, ok is true. if not ok is false.
+
+	If key is not in the map, then element is the zero value for the map's element type.
+
+	Note:  if element and ok is not declared then we need to use a short declaration form.
+element, ok := m[key]

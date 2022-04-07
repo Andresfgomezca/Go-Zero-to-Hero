@@ -1,0 +1,16 @@
+Methods
+
+	We saw that with the help of struct we can bind the other different types to make new custom entity, along with data we can also bind methods to the struct type.
+Go Supports methods defined on the struct types. Go methods is nothing but a go function with receiver parameter of particular type.
+
+	Go does not have classes. However, you can define methods on types. A method is a function with a special receiver argument.
+
+	The receiver appears in its own argument list between the func keyword and the method name as:
+
+func (p person) display() {
+    fmt.Println("Name: ", p.name, "Age: ", p.age)
+}
+
+	Remember: a method is just a function with a receiver argument.
+
+	Methods can be defined for either pointer or value receiver types. Let's understand this with the help of example.

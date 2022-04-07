@@ -1,0 +1,13 @@
+Function
+
+	Functions are central in Go. func is used to declare the function. Go require explicit returns, i.e. it won't automatically return the value of the last expression.
+
+func add(a int, b int) int {
+    return a + b
+}
+
+	When we have multiple consecutive parameters of the same type, you can omit the type name for the likely typed parameters up to the final parameter that declares the type.
+
+func add(a, b, c int) int {
+    return a + b + c
+}

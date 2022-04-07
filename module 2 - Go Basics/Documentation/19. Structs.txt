@@ -1,0 +1,31 @@
+Structs
+
+	A Struct is a collection of fields. Usually we use structs to define our own type. It is typed collections of fields. They're useful for grouping data together to form records. Let's understand it with the example. The person entity has name and age fields of string and int respectively, that can be represented using struct as like
+
+type person struct {
+    name string
+    age int
+}
+
+	We can create the person object by using the above struct. The person struct is not exposed outside the package as it starts with small case letters, also it does not expose this member variables name and age.
+
+	We can create object p of type person as
+
+p := person{name: "Ross", age: 25}
+p1 := person{"Alex", 22}
+
+	We can access the struct fields with dot (.) operator as
+
+fmt.Println(p.name)
+
+	We can also create the pointer variable which points to struct variable.
+
+sp := &p
+fmt.Println(sp.age)
+
+	we can also use the dot with struct pointers - the pointers are automatically dereferenced.
+
+	Structs are mutable, we can change the value using assignment operator.
+
+sp.age = 29
+fmt.Println(sp.age)

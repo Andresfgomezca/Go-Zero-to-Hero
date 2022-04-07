@@ -1,0 +1,40 @@
+Conditional Statement - Switch
+
+	A switch statement is a shorter way to write a sequence of if - else statements. it runs the first case whose value is matching the condition expression.
+
+	Go's switch is like other languages like C, C++ and Java, except that Go only runs the selected case, not all the cases that follow. In effect, the break statement that is needed end of each case statement as like in other languages is not required in Go.
+
+	Another important difference is that Go's switch cases need not be constants and the values involved need not be integers.
+
+fmt.Print("Go runs on ")
+switch os := runtime.GOOS; os {
+case "darwin":
+	fmt.Println("OS X.")
+case "linux":
+	fmt.Println("Linux.")
+default:
+	// freebsd, openbsd,
+	// plan9, windows...
+	fmt.Printf("%s.\n", os)
+}
+
+	Switch cases evaluates cases from top to bottom, stopping when a case succeeds.
+
+e.g.:
+switch i {
+    case 0:
+    case f():
+}
+
+//Here f() does not get called if i == 0. 
+	Switch without condition is the same as switch with true. This constructs can be a clean way to write long if-then-else chains
+
+t := time.Now()
+switch {
+case t.Hour() < 12:
+	fmt.Println("Good morning!")
+case t.Hour() < 17:
+	fmt.Println("Good afternoon.")
+default:
+	fmt.Println("Good evening.")
+}

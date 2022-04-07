@@ -1,0 +1,75 @@
+Slices
+
+	Slices are a key data type in Go, giving a more powerful interface to sequences than array. An array has a fixed size. A slice, on the other hand, is a dynamically-sized, flexible view into the elements of an array. In practice, slices are much more common than arrays. Unlike arrays, slices are typed only by the elements they contain (not the number of elements)
+
+The type []T is a slice with elements of type T.
+
+	A slice is formed by specifying two indices, a low and high bound, separated by a colon:
+
+	a[low : high]
+
+	This selects a half open which includes the first element, but excludes the last one.
+
+	The following expression create the slice which includes the elements 1 to 3 of a:
+
+	a[1:4]
+
+	We can create an empty slice with non-zero length, using the builtin make() function as
+
+	s := make([]int, 5)
+
+	Here slice of int will be created with capacity of 5 elements.
+len() returns the length of slice (no of elements available in the slice)
+cap() returns the how many elements that slice can hold.
+In addition to basic operations, slices supports the several functions to get richer than array.
+append() built-in slice function which returns the slice contain the one or more elements, we can use this function to add one or more elements into slice and it returns the updated or newly created slice.
+
+	s := make([]string, 3)
+	s = append(s, "d")
+	s = append(s, "e", "f")
+	fmt.Println("apd:", s)
+
+	copy() slices also can be copied. using copy() function we can create a copy of slice.
+
+	c := make([]string, len(s))
+	copy(c, s)
+	fmt.Println("cpy:", c)
+
+
+Slices are like references to array
+
+	1. A slice does not store any data, it just describes a section of an underlying array.
+	2. Changing the elements of a slice modifies the corresponding elements of its underlying array. 
+	3. Other slices that share the same underlying array will see those changes.
+
+Slice Literals
+
+	A slice literal is like an array literal without the length
+
+		[]bool{true, false, true}
+
+Slice Defaults
+
+	When slicing, you may omit the high or low bounds to use their defaults instead. The default is 0 for the lower bound and the length of the slice is the higher bound.
+
+	for the array
+	var a [10]int
+
+	these slice expressions are equivalent:
+
+	a[0:10]
+	a[:10]
+	a[0:]
+	a[:]
+
+Slice length and capacity
+
+	1. A slice has both a length and capacity.
+	2. The length of a slice is the number of elements it contains.
+	3. The capacity of a slice is the number of elements in the underlying array, counting from the first element in the slice.
+	4. The length and capacity of a slice s can be obtained using the expressions len(s) and cap(s)
+	5. You can extend a slice's length by re-slicing it, provided it has sufficient capacity. 
+
+Nil Slices
+
+	The zero value of slice is nil. A nil slice has a length and capacity of 0 and has no underlying array.
