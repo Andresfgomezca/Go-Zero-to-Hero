@@ -1,0 +1,11 @@
+Empty Interface
+
+	The interface type that specifies zero methods is known as the empty interface:
+
+		interface{}
+
+	An empty interface may hold values of any type as every type implements at least zero methods.
+
+	Empty interfaces are used by code that handles values of unknown type. For example fmt.Println() takes any number fo arguments of type interface{}
+
+	As of now there is no support for generics in the Go, but with the help of empty interface (interface{}) we can achieve the behaviour of the generics. 

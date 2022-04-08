@@ -1,0 +1,31 @@
+String functions
+
+	The standard library’s strings package provides many useful string-related functions. Here are some examples to give you a sense of the package.
+
+	We alias fmt.Println to a shorter name as we’ll use it a lot below.
+	
+		var p = fmt.Println
+
+	Here are few example functions from the strings package. You can find more functions in the strings package docs.
+
+Contains(string1, string2): returns true if given string2 is a sub set of string1.
+
+Count(string1, string2): returns no of times string2 appears as a subset in string1.
+
+HasPrefix(string1, string2): returns true if string2 is prefix of string1.
+
+HasSuffix(string1, string2): returns true if string2 is suffix of string1.
+
+Index(string1, string2): returns int index of string2 appear in string1.
+
+Join([]string, string1): joins the string slice with string1 as a concatenation string and returns the formed string.
+
+Repeat(string1, int1): return the newly created string from string1 by repeating int1 times.
+
+Replace(string1, string2, string3, int1): Replace string2 with string3 from string1 for int1 occurrences. if int1 is -1 then replace all occurrences.
+
+Split(string1, string2): Splits string1 and split character will be considered as string2
+
+ToLower(string1): returns the lowercase version of string1
+
+ToUpper(string1): returns the uppercase version of string1

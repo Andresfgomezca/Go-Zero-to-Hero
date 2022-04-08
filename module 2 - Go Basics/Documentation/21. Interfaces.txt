@@ -1,0 +1,15 @@
+Interfaces
+
+	Interfaces are named collections of method signatures. A value of interface type can hold any value that implements those methods.
+
+	A type implements an interface by implementing its methods. There is no explicit declaration of intent, no "implements" keyword.
+
+	Implicit interfaces decouple the definition of an interface from its implementation, which could then appear in any package without prearrangement.
+
+Interfaces 2
+
+	Here’s a basic interface for geometric shapes.
+
+	To implement an interface in Go, we just need to implement all the methods in the interface. Here we implement geometry in rects.
+	
+	If a variable has an interface type, then we can call methods that are in the named interface. Here’s a generic measure function taking advantage of this to work on any geometry.

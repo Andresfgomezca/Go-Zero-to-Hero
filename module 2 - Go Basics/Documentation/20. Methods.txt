@@ -14,3 +14,19 @@ func (p person) display() {
 	Remember: a method is just a function with a receiver argument.
 
 	Methods can be defined for either pointer or value receiver types. Let's understand this with the help of example.
+
+	Go automatically handlers conversion between values and pointers for method calls. You may want tot use a pointer receiver types to avoid copying on method calls or to allow the method to mutate the receiving struct.
+
+	Methods with value receiver are work as a PASS BY VALUE on receiver type, i.e. any changes done in the method will not reflect in the actual receiver object. On the other hand methods with pointer receiver will work as a PASS BY REFERENCE on receiver type, any changes done on receiver object in the method will reflect on the actual receiver object and persist outside of the method scope. Here is the example.
+
+Output for the example of method with pointers:
+Square of Num: 25
+Cube of Num: 0
+
+	In the above code, method calculateSquare() is of type pointer receiver and method calculateCube() is of value receiver. when we look at the result, value of square is updated successfully but value of cube is not not updated. this is the major difference between the pointer receiver and value receiver.
+ 
+
+	You Can declare a method on non-struct types too. In the following example we can see a numeric type MyInt with a cube() method.
+
+	You can You can only declare a method with a receiver whose type is defined in the same package as the method. You cannot declare a method with a receiver whose type is defined in another package (which includes the built-in types such as float).
+ 
