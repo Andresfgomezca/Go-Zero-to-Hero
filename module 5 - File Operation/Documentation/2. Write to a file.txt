@@ -1,0 +1,24 @@
+Writing to a file
+
+1. Write Bytes to a File
+
+	We can write using just the os package which is needed already to open the file.
+
+	Since all Go executables are statically linked binaries, every package you import increases the size of your executable. Other packages like io, ioutil, and bufio provide some more help, but they are not necessary for this
+
+2. Quick Write to File
+
+	The ioutil package has a useful function called WriteFile() that will handle creating/opening, writing a slice of bytes, and closing.
+
+	It is useful if you just need a quick way to dump a slice of bytes to a file.
+
+3. Writing to file using Buffered Writer
+
+	The bufio package lets you create a buffered writer so you can work with a buffer in memory before writing it to disk.
+
+	This is useful if we need to do a lot manipulation on the data before writing it to disk to save time from disk IO.
+
+	It is also useful if we only write one byte at a time and want to store a large number in memory before dumping it to file at once, otherwise we would be performing disk IO for every byte. That puts wear and tear on the disk as well as slows down the process.
+
+For more details please refer: link
+https://www.devdungeon.com/content/working-files-go

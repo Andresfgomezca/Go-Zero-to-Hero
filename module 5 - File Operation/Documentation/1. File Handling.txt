@@ -1,0 +1,31 @@
+File Handling
+
+	Go offers excellent support to perform file-related operations, such as creating a file, read/write operations, file rename or move, copy, getting metadata information of the file, and so forth.
+The os package provides an API interface for file handling which is uniform across all operating systems. Although the design follows Unix standards, it provides a platform-independent interface to any operating system functionality.
+
+	The packages such as io, ioutil and bufio provide interfaces for I/O operations such as read and write operations on the content of the file.
+
+1. File Creation
+
+	We use the Create() method for this from os package.
+
+We can do file operations like Rename, Move, Delete, Open , Close , Check permissions of file using os package.
+
+2.Get File Information
+	
+	We use Stat() method from os package to get metadata of file.
+
+3. File Reading & Opening Operations:
+
+	We can use Open() or OpenFile() method of os package to read from a file.
+
+	Difference of Open () and OpenFile() method is s follow:
+		Open() : Opens files in ReadOnly mode only.
+		OpenFile() : We can select files in multiple modes and perform many operations on the file. We will see this example in write operation.
+
+	There is also bufio package we can use for file operations. 
+
+	Buffered reader will store a memory buffer with some of the contents. A buffered reader also provides some more functions that are not available on the os.File type or the io.Reader
+
+	Refer this link for more details on ioutil, bufio package: link
+https://www.devdungeon.com/content/working-files-go

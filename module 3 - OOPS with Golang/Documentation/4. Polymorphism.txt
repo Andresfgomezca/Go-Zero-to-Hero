@@ -1,0 +1,9 @@
+Polymorphism
+
+	Polymorphism is the ability to write code that can take on different behaviour through the implementation of types.
+
+	Polymorphism in Go is achieved with the help of interfaces
+
+	Any type which provides definition for all the methods of an interface is said to implicitly implement that interface.
+
+	A variable of type interface can hold any value which implements the interface.This property of interfaces is used to achieve polymorphism in Go.

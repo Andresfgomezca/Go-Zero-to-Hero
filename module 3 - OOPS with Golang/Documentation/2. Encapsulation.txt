@@ -1,0 +1,6 @@
+Encapsulation
+
+	Golang provides encapsulation at the package level
+	control the visibility is using the capitalized and non-capitalized formats
+	Capitalized Identifiers are exported
+	Non-capitalized identifiers are not exported

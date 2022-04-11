@@ -1,0 +1,59 @@
+	Go provides built-in support for base64 encoding/decoding.
+
+	Go supports both standard and URL-compatible base64.
+
+	Go provides an encoding/base64 package that can be used to encode strings to base64 and decode the base64 encoded string back to the original string.
+
+	Go supports base64 in 4 different ways.
+
+	1. StdEncoding– Standard 64 characters with padding. It encodes into below characters
+		ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/
+
+	2. URLEncoding –  Same as StdEncoding just that in this, the ‘+’ and ‘\’ sign is replaced with ‘-‘ and ‘_’. They are replaced to make them compatible with filenames and URLs. Below is the character set for base64 URL encoding
+		ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_
+
+	3. RawStdEncoding – This is the same as StdEncoding just that it omits padding characters.  So it is unpadded base64  STD encoding.
+
+	4. RawURLEncoding – This is also the same as URL encoding just that it omits padding characters. So it is unpadded base64 URL encoding.
+
+Each of the above encodings is represented by the Encoding struct
+https://golang.org/pkg/encoding/base64/#Encoding
+
+Encoding struct further defines two methods for encoding and decoding
+
+	1. EncodeToString – Below is the signature of the method. It takes bytes as an input and returns the base64 encoded string depending upon which one of the above 4 encodings is used.
+func (enc *Encoding) EncodeToString(src []byte) string
+
+	2. DecodeString – Below is the signature of the method. It takes the encoded string as an input and returns the original string depending upon which one of the above 4 encodings is used.
+func (enc *Encoding) DecodeString(s string) ([]byte, error)
+
+1. StdEncoding:
+
+2. URLEncoding:
+
+	In this, the ‘+’ and ‘\’ sign is replaced with ‘-‘ and ‘_’. They are replaced to make them compatible with filenames and URLs. 
+
+	URL: In URLs ‘+’ and ‘\’  are further encoded into hexadecimal sequences due to URL encoding thereby further increasing the length of the URL. For eg ‘+’ will be converted to ‘%2B’ and ‘\’ will be encoded to ‘%2F’ in the URL encoding.
+
+	Filenames:  ‘\’ is used in file paths in both Unix and Windows. Hence it ‘\’ is replaced with ‘_’
+
+3. RawStdEncoding
+
+	This is the same as StdEncoding just that it omits padding characters.
+
+	So it is unpadded STD base64 encoding. Let’s see an example.
+
+	is padding necessary?
+
+		1.Padding is not necessary when you are sending a single string.
+		2.Padding is important when you are concatenating base64 encodings of multiple strings. If unpadded strings are concatenated then it will be impossible to get the original string as information about the bytes added will be lost.
+
+	why do you need to concatenate multiple base64 encoded strings :- The answer is that it is always good in cases where there is streaming data and you want to send the base64 encoded data as it comes. For example, buffering of video.
+
+	So that is why padding is encouraged though not absolutely not necessary in all cases.
+
+4. RawURLEncoding
+
+	This is also the same as URL encoding just that it omits padding characters. So it is unpadded STD base64 encoding.
+
+https://golangbyexample.com/base64-golang/

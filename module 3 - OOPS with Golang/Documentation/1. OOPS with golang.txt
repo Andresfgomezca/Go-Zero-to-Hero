@@ -1,0 +1,5 @@
+Struct Instead of Classes
+
+	Structs are user-defined data types/structures
+	Method can be added to structs 
+	This provide behaviour of bundling the data and methods that operate on the data together similar to a class
