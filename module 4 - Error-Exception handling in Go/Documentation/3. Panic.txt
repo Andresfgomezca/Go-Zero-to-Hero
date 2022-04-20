@@ -1,0 +1,40 @@
+Panic:
+
+	-Errors are sufficient to handle most of the abnormal conditions arising in the Go program.
+
+	-There are some situations where the program cannot continue execution after an abnormal condition. In this case, we use panic to prematurely terminate the program
+
+	-In this case, we use panic to prematurely terminate the program.
+
+	-When a function encounters a panic, its execution is stopped, any deferred functions are executed and then the control returns to its caller.
+
+	-This process continues until all the functions of the current goroutine have returned at which point the program prints the panic message, followed by the stack trace and then terminates.
+	
+	-Important factor is that you should avoid panic and recover and use errors where ever possible
+
+Valid use cases for panic:
+
+	-An unrecoverable error where the program cannot simply continue its execution.
+One example is a web server that fails to bind to the required port. In this case, it's reasonable to panic as there is nothing else to do if the port binding itself fails.
+
+	-A programmer error:
+Let's say we have a method that accepts a pointer as a parameter and someone calls this method using a nil argument. In this case, we can panic as it's a programmer error to call a method with nil argument which was expecting a valid pointer.
+
+	-The signature of the built-in 
+panic
+
+	-function is provided below
+
+func panic(interface{})  
+
+Running this program will print the following output,
+
+panic: runtime error: last name cannot be nil
+
+goroutine 1 [running]:  
+main.fullName(0xc00006af58, 0x0)  
+    /tmp/sandbox210590465/prog.go:12 +0x193
+main.main()  
+    /tmp/sandbox210590465/prog.go:20 +0x4d
+For more details refer- link
+https://golangbot.com/panic-and-recover/

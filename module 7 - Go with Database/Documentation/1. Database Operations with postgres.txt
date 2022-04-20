@@ -1,0 +1,133 @@
+Database Operations with Postgres
+
+	In this section, we will connect to the Postgres database and perform Create, Read, Update, and Delete operations.
+
+Importing the Postgres Driver
+
+	Let's create the folder structure for this tutorial names postgres-demo and initialise the go module for the project using 
+
+	go mod init postgres-demo
+
+	Let's pull the Postgres database dependency.
+
+	go get -u github.com/lib/pq
+
+	First of all, we will create the Database table using following query
+
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  age INT,
+  first_name TEXT,
+  last_name TEXT,
+  email TEXT UNIQUE NOT NULL
+);
+
+	Let's create a go struct which can define user struct.
+
+type User struct {
+	Id        int
+	FirstName string
+	LastName  string
+	Email     string
+	Age       int
+}
+
+	We can create a function which will connect to the database and return the database instance using that we will perform the database operation
+
+func getDBConnection() (*sql.DB, error) {
+	psqlconn := fmt.Sprintf("host=%s port = %d user=%s password = %s dbname = %s sslmode=disable", host, port, user, password, dbname)
+
+	return sql.Open("postgres", psqlconn)
+}
+
+	All the database connection details we can store in the constants as like
+
+const (
+	host     = "localhost"
+	port     = 54320
+	user     = "postgres"
+	password = "my_password"
+	dbname   = "postgres"
+)
+
+Insert record
+
+	To insert record into the database we will define a method and pass the user struct to the function.
+
+func InsertUser(user *User) error {
+	insertStmt := `insert into users(first_name, last_name, email, age) values($1, $2, $3, $4)`
+
+	_, e := db.Exec(insertStmt, user.FirstName, user.LastName, user.Email, user.Age)
+	if e != nil {
+		log.Fatalf("Error while inserting into Emp table: %s", e)
+		return e
+	}
+	fmt.Println("Record Inserted successfully")
+
+	return nil
+}
+
+	Fetch all user record
+
+func getAllUsers() ([]User, error) {
+	fetchAllUsers := `select * from users`
+	rows, err := db.Query(fetchAllUsers)
+	if err != nil {
+		log.Fatalf("Error while fetching all users: %s", err)
+		return nil, err
+	}
+	var users []User
+	defer rows.Close()
+	for rows.Next() {
+		var user User
+		if err := rows.Scan(&user.Id, &user.Age, &user.FirstName, &user.LastName, &user.Email); err != nil {
+			log.Fatal(err)
+		}
+		users = append(users, user)
+	}
+
+	return users, nil
+}
+
+	Fetch user by ID
+
+func getUser(userId int) (User, error) {
+	getUserSql := `select * from users where id = $1`
+	rows, err := db.Query(getUserSql, userId)
+	if err != nil {
+		return User{}, err
+	}
+	var user User
+	if rows.Next() {
+		if err = rows.Scan(&user.Id, &user.Age, &user.FirstName, &user.LastName, &user.Email); err != nil {
+			log.Fatal(err)
+		}
+	}
+	return user, nil
+}
+
+	Delete User by ID
+
+func deleteUser(userId int) error {
+	deleteUser := `delete from users where id = $1`
+	_, err := db.Query(deleteUser, userId)
+	if err != nil {
+		log.Fatalf("Error while deleting user: %s", err)
+		return err
+	}
+
+	return nil
+}
+
+	Update user
+
+func updateUser(user *User) (bool, error) {
+	updateUserQuery := `update users set first_name=$1, last_name=$2, email=$3, age=$4 where id=$5`
+	_, err := db.Exec(updateUserQuery, user.FirstName, user.LastName, user.Email, user.Age, user.Id)
+	if err != nil {
+		log.Fatalf("Error while updating the user: %s", err)
+		return false, nil
+	}
+
+	return true, nil
+}

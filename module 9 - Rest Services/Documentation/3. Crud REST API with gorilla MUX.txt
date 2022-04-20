@@ -1,0 +1,59 @@
+CRUD REST API with Gorilla MUX​​​​​
+
+	A common use case for Go applications is building REST API web services. In this article, we’re looking into how to implement a REST API with create, read, update, and delete (CRUD) operations for a User entity. For HTTP routing we’re going to use the library gorilla/mux.
+
+	Go has an HTTP router included in its standard library, but this router only provides minimal routing capabilities. For example, for routing different HTTP methods on the same path to different handler functions, we would have to define a handler functions with a switch case reading the method from a request object and call the appropriate function for that method. With gorilla/mux we get some additional routing options, it provides following routing capabilities we’re going to use throughout this post:
+
+	-HTTP Method based routing
+​​​​​​​
+	-Routing for path parameters e.g. /users/{id}
+
+	-Routing for query parameters e.g. /users?sort=firstname
+
+	Because of this approach, you can use gorilla/mux well alongside many other libraries that make use of this interface.
+
+	We start declaring the user struct.
+
+type User struct {
+	Id        int    `json:"id"`
+	FirstName string `json:"first_name"`
+	LastName  string `json:"last_name"`
+	Email     string `json:"email"`
+	Age       int    `json:"age"`
+}
+
+	Let's declare some database related constants
+
+const (
+	host     = "localhost"
+	port     = 54320
+	user     = "postgres"
+	password = "my_password"
+	dbname   = "postgres"
+)
+
+	Here are some routes and sub-routes defined using the gorilla/mux.
+	
+	r := mux.NewRouter()
+	usersR := r.PathPrefix("/users").Subrouter()
+	usersR.Path("/").Methods(http.MethodGet).HandlerFunc(getAllUsersHandler)
+	usersR.Path("/").Methods(http.MethodPost).HandlerFunc(createUserHandler)
+	usersR.Path("/{id}").Methods(http.MethodGet).HandlerFunc(getUserHandler)
+	usersR.Path("/{id}").Methods(http.MethodPut).HandlerFunc(updateUserHandler)
+	usersR.Path("/{id}").Methods(http.MethodDelete).HandlerFunc(deleteUserHandler)
+	log.Println("Server started listening...")
+	log.Println(http.ListenAndServe(":8080", r))
+
+	The above code block defines routes and respective methods, and handler functions which handles the HTTP requests.
+
+	Reading the path variable using gorilla/muz
+
+vars := mux.Vars(r)
+userId, err := strconv.Atoi(vars["id"])
+Reading a request body and create a struct instance
+    user := User{}
+	if err := json.NewDecoder(request.Body).Decode(&user); err != nil {
+		log.Println(err)
+		http.Error(w, "Error decoding request object", http.StatusBadRequest)
+		return
+	}

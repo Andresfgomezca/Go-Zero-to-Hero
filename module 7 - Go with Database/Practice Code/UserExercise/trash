@@ -1,0 +1,35 @@
+user1 := user.User{
+		Age:       20,
+		FirstName: "James",
+		LastName:  "Bond",
+		Email:     "Jbond15@globant.com",
+		ZipCode:   "777666",
+		City:      "CityTEST",
+		AddressU:  "AddressTEST",
+		StateU:    "StateTEST",
+		PasswordU: "TEST123",
+	}
+
+	user2 := user.User{
+		Age:       20,
+		FirstName: "James",
+		LastName:  "Bond",
+		Email:     "Jbond14@globant.com",
+		ZipCode:   "777666",
+		City:      "CityTEST",
+		AddressU:  "AddressTEST",
+		StateU:    "StateTEST",
+		PasswordU: "TEST123",
+	}
+
+	user.Err = user.InsertNewUser(&user1)
+
+	checkError(user.Err)
+
+	user.Err = user.InsertNewUser(&user2)
+
+	checkError(user.Err)
+
+	user.Err = user.DeleteUserById(1)
+
+	checkError(user.Err)

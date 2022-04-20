@@ -1,0 +1,78 @@
+Writing Unit Tests in Go
+
+	We will try to write our first test in Go. Writing tests in go requires a test file link, and this test file must always end with _test.go.  By convention, Go testing files are always located in the same folder, or package, where the code they are testing resides. These files are not built by the compiler when we run the go build command, so we don't need to worry about them ending up in deployments.
+
+	And as with everything in Go, the language is opinionated about testing.  The Go language provides a minimal yet complete package called testing that developers use alongside the go test command. The testing package provides some useful conventions, such as coverage tests and benchmarks, which you will now explore.
+Let's create one Go program which we will use to write some test cases around that.
+
+math.go
+
+package math
+
+// Add is our function that sums two integers
+func Add(x, y int) int {
+	return x + y
+}
+
+// Subtract subtracts two integers
+func Subtract(x, y int) int {
+	return x - y
+}
+
+	Here we have defined Add and Subtract functions which add, subtract the 2 integers and returns the result. We will start writing some test cases to test the above code.
+
+	As we saw in the previous slide, a test function in Go includes this signature: func TestXxx(t *testing.T). This means that all test functions must start with the word Test, followed by a suffix whose first word is capitalized. Test functions in Go receive only one parameter, and in this case, it’s a pointer of type testing.T. This type contains useful methods that you will need to output results, log errors to the screen, and signal failures, like the t.Errorf() method.
+
+math_test.go
+
+package math
+
+import "testing"
+
+func TestAdd(t *testing.T) {
+	got := Add(4, 6)
+	want := 10
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+}
+
+	First, we declare the name of the package that we want to test --- math. Then import the package testing, which then makes available the testing.T type and the other types and methods exported by the package. The code and testing logic is contained in the TestAdd function.
+
+	To summarize, the following are characteristics of a test in Go:
+
+	-The first and only parameter must be t *testing.T
+
+	-The testing function begins with the word Test followed by a word or phrase that starts with a capital letter (the convention is to use the name of the method under test, e.g., TestAdd)
+
+	-The test calls t.Error or t.Fail to indicate a failure (we are calling t.Error because it returns more detail than t.Fail)
+
+	-We can use t.Log to provide non-failing debug information
+
+	-Tests are saved in files using this naming convention: foo_test.go, such as math_test.go.
+Let's run the test case we have now. using go test we can run the test cases. go test is a powerful subcommand that helps you automate your tests. go test accepts different flags that can configure the tests you wish to run, how much verbosity the tests returns, and more.
+
+From  your project's root directory, run your first test:
+
+> go test
+
+Output we will receive is
+PASS
+ok      GoTesting       0.461s
+
+	PASS means the code is working as expected. when a test fails, you will see FAIL.
+
+	The go test subcommand only looks for files with the _test.go suffix. go test then scans those file(s) for special functions including func TestXxx and several others that we will cover in later steps. go test then generates a temporary main package that calls these functions in the proper way, builds and runs them, reports the results, and finally cleans everything up.
+
+	Our go test is probably sufficient for our little program, but there will be times when you’ll wish to see what tests are running and how long each takes. Adding the -v flag increases verbosity. Rerun your test with the new flag:
+
+> go test -v
+
+	we will see the following output
+
+=== RUN   TestAdd
+--- PASS: TestAdd (0.00s)
+PASS
+ok      GoTesting       0.425s
+
+	In this example, we ran a basic unit test using the go test subcommand. Next, we will write a more complex, table-driven unit test.

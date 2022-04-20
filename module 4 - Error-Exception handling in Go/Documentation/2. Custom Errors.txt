@@ -1,0 +1,92 @@
+Custom Errors:
+
+	-The simplest way to create a custom error is to use the New function of the errors package.
+
+	-The implementation of the New function in the errors package is provided below.
+
+// Package errors implements functions to manipulate errors.
+  package errors
+
+  // New returns an error that formats as the given text.
+  func New(text string) error {
+      return &errorString{text}
+  }
+
+  // errorString is a trivial implementation of error.
+  type errorString struct {
+      s string
+  }
+
+  func (e *errorString) Error() string {
+      return e.s
+  }
+
+	-errorString is a struct type with a single string field s. 
+
+	-The Error() string method of the error interface is implemented using a errorString pointer receiver.
+
+	-The New function takes a string parameter, creates a value of type errorString using that parameter and returns the address of it
+
+	In this program the radius is less than zero and hence it will print,
+
+		Area calculation failed, radius is less than zero 
+
+	Adding more information to the error using Errorf
+
+		-This function formats the error according to a format specifier and returns a string as value that satisfies error.
+
+		-In the program above, the 
+
+	Errorf
+
+	is used in line no. 10 to print the actual radius which caused the error. Running this program will output,
+
+Area calculation failed, radius -20.00 is less than zero 
+ 
+	Providing more information about the error using struct type with fields and methods
+
+		-create a struct to represent the error.
+
+		-consider a program which calculates the area of a rectangle. This program will print an error if either the length or width is less than zero.
+
+type areaError struct {  
+    err    string //error description
+    length float64 //length which caused the error
+    width  float64 //width which caused the error
+}
+
+	-The above error struct type contains an error description field along with the length and width which caused the error
+
+	-Implement the error interface by adding couple of methods on the error type to provide more information about the error.
+ 
+
+func (e *areaError) Error() string {  
+    return e.err
+}
+
+func (e *areaError) lengthNegative() bool {  
+    return e.length < 0
+}
+
+func (e *areaError) widthNegative() bool {  
+    return e.width < 0
+}
+	-write the area calculation function which returns area and error as areaError.
+
+func rectArea(length, width float64) (float64, error) {  
+    err := ""
+    if length < 0 {
+        err += "length is less than zero"
+    }
+    if width < 0 {
+        if err == "" {
+            err = "width is less than zero"
+        } else {
+            err += ", width is less than zero"
+        }
+    }
+    if err != "" {
+        return 0, &areaError{err, length, width}
+    }
+    return length * width, nil
+}

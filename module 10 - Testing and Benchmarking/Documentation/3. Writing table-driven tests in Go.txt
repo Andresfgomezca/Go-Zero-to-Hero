@@ -1,0 +1,43 @@
+Writing Table-Driven Tests in Go
+
+	A table-driven test is like a basic unit test except that it maintains a table of different values and results. The testing suite iterates over these values and submits them to the test code. Using this approach, we get to test several combinations of inputs and their respective output.
+
+	You will now replace your unit test with a table of structs, whose fields include the necessary two arguments (two integers) and the expected result (their sum) for your Add function.
+package math
+
+import "testing"
+
+// arg1 means argument 1 and arg2 means argument 2, and the expected stands for the 'result we expect'
+type addTest struct {
+	arg1, arg2, expected int
+}
+
+var addTests = []addTest{
+	{2, 3, 5},
+	{4, 8, 12},
+	{6, 9, 15},
+	{3, 10, 13},
+}
+
+func TestAdd(t *testing.T) {
+
+	for _, test := range addTests {
+		if output := Add(test.arg1, test.arg2); output != test.expected {
+			t.Errorf("Output %v not equal to expected %v", output, test.expected)
+		}
+	}
+}
+
+	Here you are defining a struct, populating a table of structs that include the arguments and expected results for your Add function, and then writing a new TestAdd function. In this new function, you iterate over the table, run the arguments, compare the outputs to each expected result, and then returning any errors, should they occur.
+
+	Now run the test with the -v flag:
+
+> go test -v
+Output:
+=== RUN   TestAdd
+--- PASS: TestAdd (0.00s)
+PASS
+ok      GoTesting       0.252s
+
+	With each iteration of the loop, the code tests the value calculated by the Add function against an expected value.
+ 

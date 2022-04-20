@@ -1,0 +1,79 @@
+Dealing with OS Environment Variables
+
+	An Environment Variable is a dynamic object pair on the Operating System. These value pairs can be manipulated with the help of the operating system. These value pairs can be used to store file path, user profile, authentication keys, execution mode, etc.
+
+	In Golang, we can use the os package to read and write environment variables.
+
+Set environment variable
+
+	Set an environment variable with os.Setenv(). This method accepts both parameters as strings. It returns an error if any.
+
+		os.Setenv(key,value)  
+
+Get environment variable
+	
+	Get environment variable value with os.Getenv(). This method returns the value of the variable if the variable is present else it returns an empty value.
+
+		os.Getenv(key)
+
+Delete environment variable
+
+	Delete or Unset a single environment variable using os.Unsetenv() method. This method returns an error if any.
+
+		os.Unsetenv(key)
+
+Lookup environment variable 
+
+	Get environment variable value and a boolean with os.LookupEnv(). Boolean indicates that a key is present or not. If the key is not present false is returned.
+
+		os.LookupEnv(key)
+
+Fetch all environment variables
+
+	List all the environment variable and their values with os.Environ(). This method returns a copy of strings, of the “key=value” format.
+
+		os.Environ()
+
+Delete All environment variables
+
+	Delete all environment variables with os.Clearenv().
+
+		os.Clearenv()
+Example
+
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main() {
+
+	// set environment variable TEST
+	os.Setenv("TEST", "test value")
+
+	// returns value of TEST
+	fmt.Println("TEST:", os.Getenv("TEST"))
+
+	// Unset environment variable TEST
+	os.Unsetenv("TEST")
+
+	// returns empty string and false,
+	// because we removed the GEEKS variable
+	value, ok := os.LookupEnv("TEST")
+
+	fmt.Println("TEST:", value, " Is present:", ok)
+
+    // list all environment variables and their values
+    for _, env := range os.Environ() {
+        fmt.Println(env)
+    }
+
+}
+Note: os.Clearenv() clears all the environment variables.
+// this delete's all environment variables
+// Don't try this in the home environment,
+// if you do so  you will end up deleting
+// all env variables
+os.Clearenv()

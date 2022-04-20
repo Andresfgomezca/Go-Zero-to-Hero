@@ -1,0 +1,59 @@
+Writing Coverage Tests in Go
+
+https://pkg.go.dev/testing#Coverage
+	In this step, you will write a coverage test in Go. When writing tests, it is often important to know how much of your actual code the tests cover. This is generally referred to as coverage. This is also why you have not written a test for your Subtract function — so we can view an incomplete coverage test.
+
+	Run the following command to calculate the coverage for your current unit test:
+
+> go test -coverprofile=coverage.out
+Output:
+> go test -coverprofile=coverage.out
+PASS
+coverage: 50.0% of statements
+ok      GoTesting       0.607s
+
+	Go saved this coverage data in the file coverage.out. Now you can present the results in a web browser.
+
+	Run the following command:
+	
+> go tool cover -html=coverage.out
+
+	A web browser will open, and your results will render as:
+
+	For Browser Result refer attached PDF file page 1: 50% Test coverage.
+
+	The green text indicates coverage, whereas the red text indicates the opposite.
+
+	If you see in the test coverage Subtract is not covered with the test cases, as we didn't added the test case for that function. lets go and add test case for Subtract function.
+
+func TestSubtract(t *testing.T) {
+	got := Subtract(6, 4)
+	want := 2
+	if got != want {
+		t.Errorf("got %v, wanted %v", got, want)
+	}
+}
+run the following command:
+> go test
+PASS
+ok      GoTesting       0.876s
+> go test -v
+=== RUN   TestAdd
+--- PASS: TestAdd (0.00s)
+=== RUN   TestSubtract
+--- PASS: TestSubtract (0.00s)
+PASS
+ok      GoTesting       0.264s
+> go test -coverprofile=coverage.out
+PASS
+coverage: 100.0% of statements
+ok      GoTesting       0.507s
+> go tool cover -html=coverage.out  
+
+	For Browser Result refer attached PDF file page 2: 100% Test coverage.
+	Now if you see the html output all code will be shown as a covered.
+
+
+
+go test -v shows each test
+go tool cover -html=covl cover -html cover.out -o cover.html

@@ -1,0 +1,43 @@
+Command-Line Arguments
+
+	Command-line arguments are a common way to parameterize the execution of programs. For example, go run hello.go uses run and hello.go arguments to the go program.
+
+		argsWithProg := os.Args
+
+	os.Args provides access to raw command-line arguments. Note that the first value in this slice is the path to the program
+
+		argsWithoutProg := os.Args[1:]
+
+	os.Args[1:] holds the arguments to the program.
+
+	You can get individual args with normal indexing.
+
+		arg := os.Args[3]
+
+	Let's understand the concept using code. To experiment with command-line arguments it’s best to build a binary with go build first.
+
+Example
+	View in Go Playground (You can not run this example from go playground directly. we need to pass args to the program while running)
+
+	To test this piece of code save it in the one of the code editor with fileName.go
+
+	Save the above code program using command-line-args.go and run the following command using the terminal or command prompt.
+
+	Navigate to the path where file is stored and then,
+
+		go build command-line-args.go  
+
+	Once we execute the above command, one more file gets created at the same path is executable go binary file.
+
+	To execute the go binary file execute the following command.
+
+		./command-line-args a b c d 
+
+	Here, a, b, c, and d are the arguments passed to the program.
+
+// Output:
+Arguments with Program Name: [./command-line-args a b c d]
+Arguments without Program Name: [a b c d]
+3rd Argument: c
+
+	Whenever you change anything in the source file (.go) then you need to build it again to get the latest changes get affected in the go binary file.

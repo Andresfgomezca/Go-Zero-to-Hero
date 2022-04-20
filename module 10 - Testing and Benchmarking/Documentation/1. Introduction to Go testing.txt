@@ -1,0 +1,15 @@
+Introduction to Go Testing
+
+	A unit test is a function that tests a specific piece of code from a program or package. The job of unit tests is to check the correctness of an application, and they are a crucial part of the Go programming language.
+
+	Package testing provides support for automated testing of Go packages. It is intended to be used in concert with the "go test" command, which automates execution of any function of the form.
+
+func TestXxx(*testing.T)
+
+	Where Xxx does not start with a lowercase letter. The function name serves to identify the test routine.
+
+	Within these functions, use the Error, Fail or related methods to signal failure.
+
+	To write a new test suite, create a file whose name ends _test.go that contains the TestXxx functions as described here. Put the file in the same package as the one being tested. The file will be excluded from regular package builds but will be included when the "go test" command is run. For more detail, run "go help test" and "go help testflag".
+
+	In the coming slides, We will create a small program and then run a series of tests on your code using Go’s testing package and the go test command. Once you complete the tutorial, We will have a working unit-testing suite that includes a table-based unit test, a coverage test, a benchmark, and a documented example.

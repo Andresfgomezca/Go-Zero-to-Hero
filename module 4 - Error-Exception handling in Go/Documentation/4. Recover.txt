@@ -1,0 +1,31 @@
+Recover
+
+	-recover is a builtin function that is used to regain control of a panicking program.
+
+	-The signature of recover function is provided below
+
+func recover() interface{} 
+
+	-Recover is useful only when called inside deferred functions.
+
+	-Executing a call to recover inside a deferred function stops the panicking sequence by restoring normal execution and retrieves the error message passed to the panic function call.
+
+	-If recover is called outside the deferred function, it will not stop a panicking sequence.
+
+This program will print,
+
+recovered from  runtime error: last name cannot be nil  
+returned normally from main  
+deferred call in main
+
+Getting Stack Trace after Recover
+
+	-If we recover from a panic, we lose the stack trace about the panic.
+
+	-There is a way to print the stack trace using the PrintStack function of the Debug package
+
+Panic, Recover and Goroutines
+
+	-Recover works only when it is called from the same goroutine which is panicking.
+
+	-It's not possible to recover from a panic that has happened in a different goroutine.

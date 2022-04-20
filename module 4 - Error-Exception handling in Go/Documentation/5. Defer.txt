@@ -1,0 +1,28 @@
+Defer:
+
+	-Defer statement is used to execute a function call just before the surrounding function where the defer statement is present returns.
+
+Running above program will print following output:
+
+Started finding largest  
+Largest number in [78 109 2 563 300] is 563  
+Finished finding largest  
+
+	Deferred methods
+
+		-Defer is not restricted only to functions. It is perfectly legal to defer a method call too. 
+
+This program outputs:
+
+Welcome John Smith  
+
+Practical use of defer
+
+	-Defer is used in places where a function call should be executed irrespective of the code flow
+
+	-Let's understand this with the example of a program which makes use of WaitGroup
+
+	-There is one more advantage of using defer in the above program.
+
+	-Let's say we add another return path to the area method using a new if condition. If the call to wg.Done() was not deferred, we have to be careful and ensure that we call wg.Done() in this new return path. But since the call to wg.Done() is defered, we need not worry about adding new return paths to this method.
+https://golangbot.com/defer/

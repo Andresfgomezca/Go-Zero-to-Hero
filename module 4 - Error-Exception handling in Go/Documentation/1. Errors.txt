@@ -1,0 +1,45 @@
+Errors:
+
+	Errors indicate an abnormal condition occurring in the program.
+
+	Errors are represented using the built-in error type.
+
+	Error values can be stored in variables, passed as parameters to functions, returned from functions just like any other built-in type such as int, float64
+
+	-The idiomatic way of handling errors in Go is to compare the returned error to nil. A nil value indicates that no error has occurred and a non-nil value indicates the presence of an error.
+
+	-error is an interface type with the following definition
+
+type error interface {  
+    Error() string
+}
+
+	-It contains a single method with signature Error() string. 
+
+	-Any type which implements this interface can be used as an error. This method provides the description of the error.
+
+1.Getting more information from error
+
+	-If you read the documentation of the Open function carefully, you can see that it returns an error of type *PathError. PathError is a struct type and its implementation in the standard library is as follows
+
+type PathError struct {  
+    Op   string
+    Path string
+    Err  error
+}
+
+func (e *PathError) Error() string { return e.Op + " " + e.Path + ": " + e.Err.Error() }  
+The Path field of PathError struct contains the path of the file which caused the error. Let's modify the program we wrote above and print the path.
+
+2. Direct Comparison
+
+	In the program below we search for files of pattern [ which is a malformed pattern.
+
+	To get more information about the error, we directly comparing it to filepath.ErrBadPattern in line. no 11. If the condition is satisfied, then the error is due to a malformed pattern.
+
+	This program will print,
+
+		Bad pattern error: syntax error in pattern  
+
+	Never ever ignore an error. Ignoring errors is inviting for trouble. 
+
