@@ -56,4 +56,4 @@ ok      GoTesting       0.507s
 
 
 go test -v shows each test
-go tool cover -html=covl cover -html cover.out -o cover.html
+go tool cover -html=covl cover -html cover.out -o cover.html creates the html

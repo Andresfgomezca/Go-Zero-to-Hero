@@ -1,0 +1,42 @@
+Writing Benchmarks in Go
+https://golang.org/pkg/testing/#hdr-Benchmarks
+
+	In this section, we will write a benchmark test in Go. Benchmarking measures the performance of a function or program. This allows you to compare implementations and to understand the impact of the changes you make to your code. Using that information, you can reveal parts of your Go source code worth optimizing.
+
+	In Go, functions that take the form func BenchmarkXxx(*testing.B) are considered benchmarks. go test will execute these benchmarks when you provide the -bench flag. Benchmarks are run sequentially.
+
+	Let’s add a benchmark to our unit test.
+
+	Now add a benchmark function using the func BenchmarkXxx(*testing.B) syntax:
+
+func BenchmarkAdd(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Add(4, 6)
+	}
+}
+
+	Now let's run the test case using the go test again to run our benchmark:
+
+> go test -bench=.
+
+	The . will match every benchmark function in a file.
+
+	You can also declare benchmark functions explicitly:
+
+> go test -bench=Add
+
+	Run either command, and you will see an output like this:
+
+goos: darwin
+goarch: amd64
+pkg: GoTesting
+cpu: Intel(R) Core(TM) i5-1038NG7 CPU @ 2.00GHz
+BenchmarkAdd-8          1000000000               0.2926 ns/op
+PASS
+ok      GoTesting       0.588s
+
+	The resulting output means that the loop ran 10,000,000 times at a speed of 1.07 nanosecond per loop.
+
+Note: Try not to benchmark your Go code on a busy system being used for other purposes, or else you will interfere with the benchmarking process and get inaccurate results.
+
+You have now added a benchmark to your growing unit test.

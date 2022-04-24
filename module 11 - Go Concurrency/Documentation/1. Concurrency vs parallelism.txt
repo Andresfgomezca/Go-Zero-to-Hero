@@ -1,0 +1,22 @@
+Concurrency vs Parallelism
+
+	Concurrency means that an application is making progress on more than one task at the same time (concurrently). Well, if the computer only has one CPU then application may not make progress on more than one task at exactly the same time. but more than one task is being processed at a time inside the application.It does not completely finish one task before it begins the next.
+
+	Lets take an example in real life: You are running in the park and you need to tie a shoelace. Running and tying a shoelace are two different task. You can perform both the task but not at the same time. to tie a shoelace you need to stop the run and then you can tie the showlace. This is what the concurrency all about. CPU can perform more than one task concurrently.
+
+	Concurrency means executing multiple tasks at the same time but not necessarily simultaneously. There are two tasks executing concurrently, but those are run in a 1-core CPU, so the CPU will decide to run a task first and then the other task or run half a task and half another one, etc. Two tasks can start, run and complete in overlapping time period.
+
+Concurrency means executing multiple tasks at the same time but not necessarily simultaneously.
+
+
+	Parallelism means that an application splits its tasks up into smaller subtasks which can be processed in parallel, for instance on multiple CPUs at the exact same time.
+
+	Parallelism does not require two tasks to exist. it literally physically run parts of tasks or multiple tasks, at the same time using the multi-core infrastructure of CPU, by assigning one core to each task or sub-task.
+
+	If we keep going with the same example above, Let say you are running in the park and listening to the music. Here running and listening to the music are two different task and that can be performed in parallel. 
+
+	Parallelism requires hardware with multiple processing units, essentially. In single-core CPU, you may get concurrency but NOT parallelism. Parallelism is specific kind of concurrency where tasks are really executed simultaneously.
+
+	Concurrency is about dealing with lots of things at once. Parallelism is about doing things at once.
+
+ 
