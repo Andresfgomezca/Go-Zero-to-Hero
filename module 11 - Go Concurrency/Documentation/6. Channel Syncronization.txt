@@ -1,0 +1,37 @@
+Channel Synchronization
+
+	We can use channels to synchronize execution across goroutines. Here’s an example of using a blocking receive to wait for a goroutine to finish. When waiting for multiple goroutines to finish, you may prefer to use a WaitGroup. We will explore WaitGroup in next slides.
+
+	Lets understand channel synchronization with an example:
+Example
+View in Go Playground
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func worker(done chan bool) {
+	fmt.Print("working...")
+	time.Sleep(time.Second)
+	fmt.Println("done")
+
+	done <- true
+}
+
+func main() {
+
+	done := make(chan bool, 1)
+	go worker(done)
+
+	<-done
+}
+
+	In the above code the function worker() called as a goroutine. the done channel will be used to notify another goroutine that the functions work is done.
+
+	The main goroutine starts the worker goroutine and waits until the woker goroutine finishes its execution using <-done.
+
+	The worker goroutine do its job and once it is done it informs other goroutine that worker goroutine is finished his task using done <- true.
+
+	if you removed the <- done from the main function then program would exit before the worker even started.

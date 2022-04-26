@@ -1,0 +1,60 @@
+Goroutines
+
+	A go-routine is a lightweight thread of execution managed by the Go runtime. creating and managing goroutines is very simple and straightforward. we can create any function or anonymous function as a goroutine by just appending go keyword to function call.
+
+go myFunction(a, b)
+
+	starts a new goroutine running of function
+	
+myFunction(a, b)
+
+	The evaluation of myFunction, a, and b happens in current goroutine and the execution of myFunction happens in the new goroutine.
+
+	Goroutines run in the same address space, so access to shared memory must be synchronised. The sync package provides useful primitives, although you wont need then much in Go as there are other primitives. (we will see them in next section)
+
+	Let see, the goroutine in action:
+
+Example
+View in Go Playground
+
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func say(s string) {
+	for i := 0; i < 5; i++ {
+		time.Sleep(100 * time.Millisecond)
+		fmt.Println(s)
+	}
+}
+
+func main() {
+	go say("world")
+	say("hello")
+}
+
+	In the above example, we have two goroutines, one if main goroutine and another one is say which executes say() with parameter "world". We are printing "Hello" using the main go routine and "World" with another goroutine.
+
+	When we see the output of the above program then, you will realize that, the main goroutine executes sometimes then another goroutine executes for some time, and then again the main executes and this continues.
+
+	If the main goroutine finishes its execution then it does not wait for another goroutine to finish their task, let see with the small example again.
+View in Go Playground
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	go myFunction()
+	fmt.Println("Hello from main goroutine!")
+}
+
+func myFunction() {
+	fmt.Println("Hello from Goroutine!")
+}
+
+	When we run the above code, you will not see the print statement from the myFunction(). The reason behind this is the main goroutine finished before the myFunction get a chance to execute and the program exited before finishing the myFunction(). Just to test that, we can simply add time.Sleep(1 * time.Second) at line 10 and see the result.

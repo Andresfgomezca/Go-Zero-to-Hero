@@ -1,0 +1,58 @@
+Channels
+
+	Channels are the pipes that connect concurrent goroutines. You can send values into channels from one goroutines and receive those values into another goroutine. Channels are a typed conduit through which you can send and receive values with the channel operator, <-.
+
+ch <- v         // send v to channel ch
+v := <- ch      // Receive from ch and assign value to v.
+
+	The data flows in the direction of arrow.
+
+	Like maps and slices, channels must be created before use:
+ch := make(chan int)
+
+	By default, sends and receives block until the other side is ready. This allows goroutines to synchronise without explicit locks or condition variables.
+
+Example
+View in Go Playground
+package main
+
+import "fmt"
+
+func main() {
+
+	messages := make(chan string)
+
+	go func() {
+		messages <- "ping"
+	}()
+
+	msg := <-messages
+	fmt.Println(msg)
+}
+
+Buffered Channel
+	
+	By default channels are unbuffered, meaning that they will only accept sends (chan <-) if there is a corresponding receive (<- chan) ready to receive the sent value. Channels can be buffered. Buffered channels accept a limited number of values without a corresponding receiver for those values.
+
+	messages := make(chan string, 2)
+
+Here we make a channel of strings buffering up to 2 values. Because this channel is buffered, we can send the values into the channel without corresponding concurrent receiver.
+
+	Sends to buffered channel block only when the buffer is full. Receives block when the buffer is empty.
+
+Example
+View in Go Playground
+package main
+
+import "fmt"
+
+func main() {
+
+	messages := make(chan string, 2)
+
+	messages <- "buffered"
+	messages <- "channel"
+
+	fmt.Println(<-messages)
+	fmt.Println(<-messages)
+}
