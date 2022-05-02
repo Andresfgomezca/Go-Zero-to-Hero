@@ -1,0 +1,10 @@
+1. Write a program for stack implementation(LIFO) with push and pop function in go
+ 
+2. Write a program for queue implementation(FIFO) with push and pop in go
+ 
+3. Write a program for binary search implementation in go.
+
+A binary search is a search strategy used to find elements within a list by consistently reducing the amount of data to be searched and thereby increasing the rate at which the search term is found. To use a binary search algorithm, the list to be operated on must have already been sorted
+ 
+4. Implement CRUD operation for Employee data by using in memory database.
+- use struct and map to store data as custom database

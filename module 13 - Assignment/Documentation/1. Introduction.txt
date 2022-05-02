@@ -1,0 +1,10 @@
+Golang Bootcamp
+
+https://github.com/juanpablopizarro/golang-bootcamp
+Let's try to recap our learning and try to apply the same. We will follow the Golang bootcamp and start the assignment.
+
+	Implementing In Memory DB to showcase Create, Read, Update and Delete Operation.
+
+	Implement REST services with Gorilla Mux and Mongo DB.
+
+	We can also Explore the Docker support
